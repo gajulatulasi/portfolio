@@ -1,0 +1,301 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 32% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 32% 17%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 32% 17%;
+    --input: 217 32% 17%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 240 6% 10%;
+    --sidebar-foreground: 240 5% 96%;
+    --sidebar-primary: 224 76% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4% 16%;
+    --sidebar-accent-foreground: 240 5% 96%;
+    --sidebar-border: 240 4% 16%;
+    --sidebar-ring: 217 91% 60%;
+
+    /* Clean transparent backgrounds */
+    --app-bg: #0F0F23;
+    --section-bg-primary: transparent;
+    --card-bg: transparent;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 46%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 60%;
+
+    /* Clean light mode backgrounds */
+    --app-bg: #FFFFFF;
+    --section-bg-primary: transparent;
+    --card-bg: rgba(255, 255, 255, 1);
+    --glass-bg: rgba(255, 255, 255, 0.95);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background: var(--app-bg);
+    background-attachment: fixed;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 100vh;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  #root {
+    min-height: 100vh;
+    background: var(--app-bg);
+    background-attachment: fixed;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    
+    body, #root {
+      transition: none !important;
+    }
+  }
+
+  *:focus-visible {
+    @apply outline-2 outline-blue-500 outline-offset-2;
+  }
+
+  @media (prefers-contrast: high) {
+    .gradient-text {
+      @apply text-blue-400;
+    }
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent;
+  }
+
+  .section-container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Clean section background system */
+  .section-bg {
+    background: var(--section-bg-primary);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .light .section-bg {
+    background: var(--section-bg-primary);
+    border: 1px solid rgba(59, 130, 246, 0.05);
+  }
+
+  .glass-effect {
+    background: var(--glass-bg);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .light .glass-effect {
+    background: var(--glass-bg);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+  }
+
+  .glass-effect:hover {
+    transform: translateY(-2px);
+    border-color: rgba(59, 130, 246, 0.2);
+  }
+
+  .certificate-card {
+    @apply relative overflow-hidden;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 24px;
+    position: relative;
+  }
+
+  .light .certificate-card {
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+  }
+
+  .certificate-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: rgba(59, 130, 246, 0.3);
+  }
+
+  .certificate-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+    transition: left 0.8s;
+  }
+
+  .certificate-card:hover::after {
+    left: 100%;
+  }
+
+  /* Ensure proper text contrast in all themes */
+  .light * {
+    color: inherit;
+  }
+
+  .light .text-white,
+  .light .text-gray-300,
+  .light .text-gray-400 {
+    color: hsl(var(--foreground)) !important;
+  }
+
+  .light .text-muted-foreground {
+    color: hsl(var(--muted-foreground)) !important;
+  }
+
+  .light .border-slate-700,
+  .light .border-gray-600,
+  .light .border-gray-700 {
+    border-color: hsl(var(--border)) !important;
+  }
+
+  /* Remove any remaining dark backgrounds in light mode */
+  .light .bg-slate-900,
+  .light .bg-slate-800,
+  .light .bg-slate-700,
+  .light .bg-gray-900,
+  .light .bg-gray-800 {
+    background: transparent !important;
+  }
+
+  ::selection {
+    @apply bg-blue-500/30 text-white;
+  }
+
+  .light ::selection {
+    @apply bg-blue-500/30 text-gray-900;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-800;
+  }
+
+  .light ::-webkit-scrollbar-track {
+    @apply bg-slate-200;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-600 rounded-full;
+  }
+
+  .light ::-webkit-scrollbar-thumb {
+    @apply bg-slate-400;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-500;
+  }
+
+  .loading-shimmer {
+    background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.12) 50%, transparent 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  /* Footer specific styles */
+  .footer-compact {
+    background: var(--section-bg-primary);
+    backdrop-filter: blur(25px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .light .footer-compact {
+    border-top: 1px solid rgba(59, 130, 246, 0.1);
+  }
+}
